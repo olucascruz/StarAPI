@@ -21,8 +21,9 @@ def dynamic_swapi_mock(request):
     
     # Caminho ajustado para a estrutura de pastas STARAPI/tests/mocks/
     base_path = os.path.dirname(__file__)
-    file_path = os.path.join(base_path, 'mocks', f'page_{page_number}.json')
-    
+    file_path = os.path.join(base_path, 'mocks', category, f'page_{page_number}.json')
+
+    print(f"file_path {file_path}")
     try:
         with open(file_path, 'r') as f:
             mock_data = json.load(f)
@@ -40,7 +41,6 @@ async def test_persona_ricardo_blond_hair():
 
     # Executa a lógica de busca
     results = await search_star_wars_logic("people", "hair_color", "blond")
-    
     assert len(results) > 0
     assert any("Luke Skywalker" in p["name"] for p in results)
     for p in results:

@@ -1,4 +1,3 @@
-import requests
 from flask import jsonify
 import functions_framework
 import asyncio
