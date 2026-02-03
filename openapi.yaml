@@ -1,0 +1,138 @@
+swagger: '2.0'
+info:
+  title: Star Wars Persona API
+  description: API customizada para Colecionadores, Mestres de RPG e Analistas de Frota.
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  # Rota para o Ricardo (Colecionador)
+  /v1/personagens/loiros:
+    get:
+      summary: Busca personagens loiros para o Ricardo.
+      operationId: getLoiros
+      x-google-backend:
+        address: https://starapi-253556900277.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+        - name: category
+          in: query
+          type: string
+          default: people
+        - name: key
+          in: query
+          type: string
+          default: hair_color
+        - name: value
+          in: query
+          type: string
+          default: blond
+      responses:
+        '200':
+          description: Sucesso
+
+  # Rota para a Letícia (Mestre de RPG)
+  /v1/planetas/temperados:
+    get:
+      summary: Busca planetas temperados para a Letícia.
+      operationId: getPlanetas
+      x-google-backend:
+        address: https://starapi-253556900277.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+        - name: category
+          in: query
+          type: string
+          default: planets
+        - name: key
+          in: query
+          type: string
+          default: climate
+        - name: value
+          in: query
+          type: string
+          default: temperate
+      responses:
+        '200':
+          description: Sucesso
+
+  # Rota para o Comandante Ackbar (Analista de Frota)
+  /v1/naves/kuat:
+    get:
+      summary: Busca naves fabricadas pela Kuat para o Ackbar.
+      operationId: getNaves
+      x-google-backend:
+        address: https://starapi-253556900277.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+        - name: category
+          in: query
+          type: string
+          default: starships
+        - name: key
+          in: query
+          type: string
+          default: manufacturer
+        - name: value
+          in: query
+          type: string
+          default: Kuat
+      responses:
+        '200':
+          description: Sucesso
+
+  # Rota Genérica (CORRIGIDA)
+  /v1/search:
+    get:
+      summary: Busca dinâmica em qualquer categoria da SWAPI.
+      operationId: dynamicSearch
+      x-google-backend:
+        address: https://starapi-253556900277.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+        - name: category
+          in: query
+          required: true
+          type: string
+        - name: key
+          in: query
+          required: true
+          type: string
+        - name: value
+          in: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Sucesso
+
+  /v1/filmes/correlacao:
+    get:
+      summary: "Busca correlações de um filme por ID ou Nome (ex: personagens, planetas)."
+      operationId: "getMovieCorrelations"
+      x-google-backend:
+        address: https://southamerica-east1-seu-projeto.cloudfunctions.net/starapi
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+        - name: movie
+          in: query
+          required: true
+          type: string
+          description: "Pode ser o ID (ex: 1) ou o Nome do Filme (ex: A New Hope)"
+        - name: category
+          in: query
+          required: true
+          type: string
+          description: "A lista correlacionada que deseja extrair"
+          enum: [characters, planets, starships, vehicles, species] # Validação no Gateway!
+      responses:
+        '200':
+          description: "Sucesso ao retornar a lista resolvida"
+          schema:
+            type: object
+        '400':
+          description: "Categoria inválida ou parâmetros ausentes"
+        '404':
+          description: "Filme não encontrado"
