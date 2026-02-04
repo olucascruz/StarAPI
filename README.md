@@ -68,7 +68,7 @@ Letícia (Narradora de RPG): Busca parcial de climas (ex: "temperate") em string
 
 Comandante Ackbar (Analista de Frota): Filtro por fabricante e capacidade de carga com conversão numérica dinâmica (ordenação real).
 
-🔗 Resolvionador de Correlações (O diferencial "Feral")
+🔗 Resolvionador de Correlações
 Diferente da API original que retorna URLs, a StarAPI resolve os links e entrega os nomes reais de:
 
 Personagens, Planetas, Naves, Veículos e Espécies.
@@ -89,6 +89,8 @@ Contrato: OpenAPI 2.0 (Swagger).
 
 Arquitetura de Nuvem
 A solução utiliza o padrão Facade (Fachada) através do API Gateway, garantindo que o backend (Cloud Function) permaneça isolado e seguro.
+
+
 
 Gateway: Valida API Keys e restringe categorias via enum.
 
