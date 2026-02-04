@@ -39,6 +39,9 @@ Gateway: Valida API Keys e restringe categorias via enum.
 
 Function: Orquestra chamadas assíncronas via asyncio.gather, reduzindo a latência de N requisições para o tempo de apenas uma.
 
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/76462cb9-128a-49e5-9722-9170f865c4eb" />
+
+
 📁 Estrutura do Projeto
 
 STARAPI/
